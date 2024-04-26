@@ -25,6 +25,9 @@ public:
     pair<int, int> getpos();
     void setpos(pair<int, int> s);
 
+    bool validPos(pair<int, int> s);
+
     virtual vector< pair<int, int> > moveChoice() = 0;
+    virtual void printa() = 0;
 
 };

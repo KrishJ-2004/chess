@@ -21,3 +21,11 @@ void piece::setpos(pair<int, int> s){
     position = s;
 }
 
+bool piece::validPos(pair<int, int> s){
+    if(s.first <= 7 && s.first >= 0 && s.second <= 7 && s.second >= 0){
+        return true;
+    }
+    else{
+        return false;
+    }
+}

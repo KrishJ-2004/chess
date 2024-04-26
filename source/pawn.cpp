@@ -6,9 +6,10 @@ pawn::pawn(piecenum pn = PAWN, pair<int, int> s = make_pair(-1, -1)): piece(pn, 
 
 vector< pair<int, int> > pawn::moveChoice(){
     vector< pair<int, int> > vec;
+    pair<int, int> s = getpos();
 
-    if(getpos().second < 7){
-        vec.push_back(make_pair(getpos().first, getpos().second + 1));
+    if(validPos({s.first, s.second+1})){
+        vec.push_back({s.first, s.second + 1});
     }
 
     for(int i=0; i<vec.size(); i++){
