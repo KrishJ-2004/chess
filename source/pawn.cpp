@@ -15,6 +15,8 @@ vector< pair<int, int> > pawn::moveChoice(){
     for(int i=0; i<vec.size(); i++){
         cout << "Pos: " << vec[i].first << "," << vec[i].second << endl;
     }
+
+    return vec;
 }
 
 void pawn::printa(){

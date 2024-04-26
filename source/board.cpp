@@ -3,12 +3,12 @@
 board::board(){
 
     for(int i=0; i<8; i++){
-        vector<int> *t1 = new vector<int>(8,8);
+        vector<int> *t1 = new vector<int>(8,7);
         blackboard.push_back(*t1);
     }
 
     for(int i=0; i<8; i++){
-        vector<int> *t1 = new vector<int>(8,8);
+        vector<int> *t1 = new vector<int>(8,7);
         whiteboard.push_back(*t1);
     }
 
@@ -74,4 +74,6 @@ void board::print(){
         }
         cout << endl;
     }
+
+    cout << endl;
 }

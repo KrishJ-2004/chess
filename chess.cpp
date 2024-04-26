@@ -9,29 +9,86 @@
 
 void move(int start_row, int start_column, int end_row, int end_column, board& b){
     int piece = b.getPos(start_row, start_column);
+    int emp = 7;
 
-    if(piece != 8){
+    if(piece != 7){
         if(piece == 0){
             pawn p1({start_row, start_column});
             vector<pair<int, int>> choices = p1.moveChoice();
-            for(int i=0; i<)
+            cout << choices.size() << endl;
+            for(int i=0; i<choices.size(); i++){
+                cout << choices[i].first << "," << choices[i].second << "::" << end_row << "," << end_column << endl;
+                if(choices[i].first == end_row && choices[i].second == end_column){
+                    b.setPos(end_row, end_column, 0);
+                    b.setPos(start_row, start_column, emp);
+                    return;
+                }
+            }
+            cout << "Invalid Pawn move" << endl;
         }
         else if(piece == 1){
-            knight n1({start_row, start_column})
+            knight n1({start_row, start_column});
+            vector<pair<int, int>> choices = n1.moveChoice();
+            for(int i=0; i<choices.size(); i++){
+                if(choices[i].first == end_row && choices[i].second == end_column){
+                    b.setPos(end_row, end_column, 0);
+                    b.setPos(start_row, start_column, emp);
+                    return;
+                }
+            }
+            cout << "Invalid Knight move" << endl;
         }
         else if(piece == 2){
             bishop b1({start_row, start_column});
+            vector<pair<int, int>> choices = b1.moveChoice();
+            for(int i=0; i<choices.size(); i++){
+                if(choices[i].first == end_row && choices[i].second == end_column){
+                    b.setPos(end_row, end_column, 0);
+                    b.setPos(start_row, start_column, emp);
+                    return;
+                }
+            }
+            cout << "Invalid Bishop move" << endl;
         }
         else if(piece == 3){
             rook r1({start_row, start_column});
+            vector<pair<int, int>> choices = r1.moveChoice();
+            for(int i=0; i<choices.size(); i++){
+                if(choices[i].first == end_row && choices[i].second == end_column){
+                    b.setPos(end_row, end_column, 0);
+                    b.setPos(start_row, start_column, emp);
+                    return;
+                }
+            }
+            cout << "Invalid Rook move" << endl;
         }
         else if(piece == 4){
             queen q1({start_row, start_column});
+            vector<pair<int, int>> choices = q1.moveChoice();
+            for(int i=0; i<choices.size(); i++){
+                if(choices[i].first == end_row && choices[i].second == end_column){
+                    b.setPos(end_row, end_column, 0);
+                    b.setPos(start_row, start_column, emp);
+                    return;
+                }
+            }
+            cout << "Invalid Queen move" << endl;
         }
         else if(piece == 5){
             king k1({start_row, start_column});
+            vector<pair<int, int>> choices = k1.moveChoice();
+            for(int i=0; i<choices.size(); i++){
+                if(choices[i].first == end_row && choices[i].second == end_column){
+                    b.setPos(end_row, end_column, 0);
+                    b.setPos(start_row, start_column, emp);
+                    return;
+                }
+            }
+            cout << "Invalid King move" << endl;
         }
     }
+
+    return;
 }
 
 int main(){
@@ -72,7 +129,11 @@ int main(){
     board b;
 
     b.initBoard();
+    b.print();
 
+    cout << "Moving pawn " << endl;
+    move(0,1, 0,2, b);
+    cout << "-------------" << endl;
     b.print();
 
 }
