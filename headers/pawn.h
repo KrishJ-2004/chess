@@ -14,7 +14,7 @@ private:
 
 
 public:
-    pawn(piecenum pn, pair<int, int> s);
+    pawn(pair<int, int> s);
 
     vector< pair<int, int> > moveChoice();
 

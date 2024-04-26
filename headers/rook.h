@@ -14,7 +14,7 @@ private:
 
 
 public:
-    rook(piecenum pn, pair<int, int> s);
+    rook(pair<int, int> s);
 
     vector< pair<int, int> > moveChoice();
 

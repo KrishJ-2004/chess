@@ -1,6 +1,6 @@
 #include "../headers/king.h"
 
-king::king(piecenum pn = KING, pair<int, int> s = make_pair(-1, -1)): piece(pn, s){
+king::king(pair<int, int> s = make_pair(-1, -1)): piece(KING, s){
 
 }
 

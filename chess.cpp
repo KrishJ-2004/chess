@@ -7,6 +7,32 @@
 #include "./headers/king.h"
 #include "./headers/board.h"
 
+void move(int start_row, int start_column, int end_row, int end_column, board& b){
+    int piece = b.getPos(start_row, start_column);
+
+    if(piece != 8){
+        if(piece == 0){
+            pawn p1({start_row, start_column});
+            vector<pair<int, int>> choices = p1.moveChoice();
+            for(int i=0; i<)
+        }
+        else if(piece == 1){
+            knight n1({start_row, start_column})
+        }
+        else if(piece == 2){
+            bishop b1({start_row, start_column});
+        }
+        else if(piece == 3){
+            rook r1({start_row, start_column});
+        }
+        else if(piece == 4){
+            queen q1({start_row, start_column});
+        }
+        else if(piece == 5){
+            king k1({start_row, start_column});
+        }
+    }
+}
 
 int main(){
     // pawn p1(PAWN, {2, 7});

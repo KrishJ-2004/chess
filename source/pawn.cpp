@@ -1,6 +1,6 @@
 #include "../headers/pawn.h"
 
-pawn::pawn(piecenum pn = PAWN, pair<int, int> s = make_pair(-1, -1)): piece(pn, s){
+pawn::pawn(pair<int, int> s = make_pair(-1, -1)): piece(PAWN, s){
 
 }
 

@@ -1,6 +1,6 @@
 #include "../headers/bishop.h"
 
-bishop::bishop(piecenum pn = BISHOP, pair<int, int> s = make_pair(-1, -1)): piece(pn, s){
+bishop::bishop(pair<int, int> s = make_pair(-1, -1)): piece(BISHOP, s){
 
 }
 

@@ -14,7 +14,7 @@ private:
 
 
 public:
-    knight(piecenum pn, pair<int, int> s);
+    knight(pair<int, int> s);
 
     vector< pair<int, int> > moveChoice();
 

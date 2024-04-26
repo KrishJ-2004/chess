@@ -14,7 +14,7 @@ private:
 
 
 public:
-    bishop(piecenum pn, pair<int, int> s);
+    bishop(pair<int, int> s);
 
     vector< pair<int, int> > moveChoice();
 

@@ -1,6 +1,6 @@
 #include "../headers/queen.h"
 
-queen::queen(piecenum pn = QUEEN, pair<int, int> s = make_pair(-1, -1)): piece(pn, s){
+queen::queen(pair<int, int> s = make_pair(-1, -1)): piece(QUEEN, s){
 
 }
 

@@ -1,6 +1,6 @@
 #include "../headers/knight.h"
 
-knight::knight(piecenum pn = KNIGHT, pair<int, int> s = make_pair(-1, -1)): piece(pn, s){
+knight::knight(pair<int, int> s = make_pair(-1, -1)): piece(KNIGHT, s){
 
 }
 

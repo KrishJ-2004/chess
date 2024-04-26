@@ -1,6 +1,6 @@
 #include "../headers/rook.h"
 
-rook::rook(piecenum pn = ROOK, pair<int, int> s = make_pair(-1, -1)): piece(pn, s){
+rook::rook(pair<int, int> s = make_pair(-1, -1)): piece(ROOK, s){
 
 }
 

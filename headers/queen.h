@@ -14,7 +14,7 @@ private:
 
 
 public:
-    queen(piecenum pn, pair<int, int> s);
+    queen(pair<int, int> s);
 
     vector< pair<int, int> > moveChoice();
 
