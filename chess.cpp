@@ -10,7 +10,6 @@
 void move(int start_row, int start_column, int end_row, int end_column, board& b){
     int piece = b.getPos(start_row, start_column);
     int emp = 7;
-
     if(piece != 7){
         if(piece == 0){
             pawn p1({start_row, start_column});
