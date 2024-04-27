@@ -12,6 +12,11 @@ board::board(){
         whiteboard.push_back(*t1);
     }
 
+    for(int i=0; i<8; i++){
+        vector<int> *t1 = new vector<int>(8,7);
+        color.push_back(*t1);
+    }
+
 }
 
 int board::getPos(int a, int b){
@@ -22,6 +27,15 @@ void board::setPos(int a, int b, int piece){
     whiteboard[a][b] = piece;
     blackboard[7-a][7-b] = piece;
 }
+
+int board::getCol(int a, int b){
+    return color[a][b];
+}
+
+void board::setCol(int a, int b, int Col){
+    color[a][b] = Col;
+}
+
 
 void board::initBoard(){
     setPos(0, 0, 3);
@@ -38,7 +52,10 @@ void board::initBoard(){
 
     for(int i=0; i<8; i++){
         setPos(i, 1, 0);
+        setCol(i, 1, 0);
+        setCol(i, 0, 0);
     }
+
 
     setPos(0, 7, 3);
     setPos(7, 7, 3);
@@ -54,11 +71,13 @@ void board::initBoard(){
 
     for(int i=0; i<8; i++){
         setPos(i, 6, 0);
+        setCol(i, 6, 1);
+        setCol(i, 7, 1);
     }
 
 }
 
-void board::print(){
+void board::printwhite(){
     for(int i=0; i<8; i++){
         for(int j=0; j<8; j++){
             cout << whiteboard[j][7-i] << " ";
@@ -68,6 +87,9 @@ void board::print(){
 
     cout << "------------------------" << endl;
 
+}
+
+void board::printblack(){
     for(int i=0; i<8; i++){
         for(int j=0; j<8; j++){
             cout << blackboard[j][7-i] << " ";
@@ -75,5 +97,22 @@ void board::print(){
         cout << endl;
     }
 
-    cout << endl;
+    cout << "------------------------" << endl;
+}
+
+void board::printcolor(){
+    for(int i=0; i<8; i++){
+        for(int j=0; j<8; j++){
+            cout << color[j][7-i] << " ";
+        }
+        cout << endl;
+    }
+
+    cout << "------------------------" << endl;
+}
+
+void board::print(){
+    printwhite();
+    printblack();
+    printcolor();
 }

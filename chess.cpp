@@ -6,13 +6,14 @@
 #include "./headers/queen.h"
 #include "./headers/king.h"
 #include "./headers/board.h"
+#include <stdlib.h>
 
 void move(int start_row, int start_column, int end_row, int end_column, board& b){
     int piece = b.getPos(start_row, start_column);
     int emp = 7;
-    if(piece != 7){
 
-        
+    if(piece != emp){
+
         if(piece == 0){
             pawn p1({start_row, start_column});
             vector<pair<int, int>> choices = p1.moveChoice();
@@ -21,7 +22,9 @@ void move(int start_row, int start_column, int end_row, int end_column, board& b
                 cout << choices[i].first << "," << choices[i].second << "::" << end_row << "," << end_column << endl;
                 if(choices[i].first == end_row && choices[i].second == end_column){
                     b.setPos(end_row, end_column, 0);
+                    b.setCol(end_row, end_column, b.getCol(start_row, start_column));
                     b.setPos(start_row, start_column, emp);
+                    b.setCol(start_row, start_column, emp);
                     return;
                 }
             }
@@ -33,7 +36,9 @@ void move(int start_row, int start_column, int end_row, int end_column, board& b
             for(int i=0; i<choices.size(); i++){
                 if(choices[i].first == end_row && choices[i].second == end_column){
                     b.setPos(end_row, end_column, 0);
+                    b.setCol(end_row, end_column, b.getCol(start_row, start_column));
                     b.setPos(start_row, start_column, emp);
+                    b.setCol(start_row, start_column, emp);
                     return;
                 }
             }
@@ -45,7 +50,9 @@ void move(int start_row, int start_column, int end_row, int end_column, board& b
             for(int i=0; i<choices.size(); i++){
                 if(choices[i].first == end_row && choices[i].second == end_column){
                     b.setPos(end_row, end_column, 0);
+                    b.setCol(end_row, end_column, b.getCol(start_row, start_column));
                     b.setPos(start_row, start_column, emp);
+                    b.setCol(start_row, start_column, emp);
                     return;
                 }
             }
@@ -57,7 +64,9 @@ void move(int start_row, int start_column, int end_row, int end_column, board& b
             for(int i=0; i<choices.size(); i++){
                 if(choices[i].first == end_row && choices[i].second == end_column){
                     b.setPos(end_row, end_column, 0);
+                    b.setCol(end_row, end_column, b.getCol(start_row, start_column));
                     b.setPos(start_row, start_column, emp);
+                    b.setCol(start_row, start_column, emp);
                     return;
                 }
             }
@@ -69,7 +78,9 @@ void move(int start_row, int start_column, int end_row, int end_column, board& b
             for(int i=0; i<choices.size(); i++){
                 if(choices[i].first == end_row && choices[i].second == end_column){
                     b.setPos(end_row, end_column, 0);
+                    b.setCol(end_row, end_column, b.getCol(start_row, start_column));
                     b.setPos(start_row, start_column, emp);
+                    b.setCol(start_row, start_column, emp);
                     return;
                 }
             }
@@ -81,7 +92,9 @@ void move(int start_row, int start_column, int end_row, int end_column, board& b
             for(int i=0; i<choices.size(); i++){
                 if(choices[i].first == end_row && choices[i].second == end_column){
                     b.setPos(end_row, end_column, 0);
+                    b.setCol(end_row, end_column, b.getCol(start_row, start_column));
                     b.setPos(start_row, start_column, emp);
+                    b.setCol(start_row, start_column, emp);
                     return;
                 }
             }
@@ -93,6 +106,7 @@ void move(int start_row, int start_column, int end_row, int end_column, board& b
 }
 
 int main(){
+    system("CLS");
     // pawn p1(PAWN, {2, 7});
 
     // cout << "PAWN: " << endl;
