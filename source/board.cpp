@@ -78,26 +78,86 @@ void board::initBoard(){
 }
 
 void board::printwhite(){
+    HANDLE h = GetStdHandle(STD_OUTPUT_HANDLE);
+
     for(int i=0; i<8; i++){
+        SetConsoleTextAttribute(h, 9);
+        cout << 8-i << "| ";
+        SetConsoleTextAttribute(h, 15);
         for(int j=0; j<8; j++){
-            cout << whiteboard[j][7-i] << " ";
+            if(whiteboard[j][7-i] != 7){
+                if(color[j][7-i] == 0){
+                    SetConsoleTextAttribute(h, 15);
+                    cout << whiteboard[j][7-i] << " ";
+                }
+                else{
+                    SetConsoleTextAttribute(h, 8);
+                    cout << whiteboard[j][7-i] << " ";
+                }
+            }
+            else{
+                SetConsoleTextAttribute(h, 6);
+                cout << "-" << " ";
+            }
         }
         cout << endl;
     }
 
     cout << "------------------------" << endl;
+
+    SetConsoleTextAttribute(h, 9);
+    cout << "0| ";
+    for(int i=0; i<8; i++){
+        char let = 'A';
+        cout << (char)(let + i) << " ";
+    }
+    SetConsoleTextAttribute(h, 7);
+
+    cout << endl;
+
+    // printcolor();
 
 }
 
 void board::printblack(){
+    HANDLE h = GetStdHandle(STD_OUTPUT_HANDLE);
+
     for(int i=0; i<8; i++){
+        SetConsoleTextAttribute(h, 9);
+        cout << i+1 << "| ";
+        SetConsoleTextAttribute(h, 15);
         for(int j=0; j<8; j++){
-            cout << blackboard[j][7-i] << " ";
+            if(blackboard[j][7-i] != 7){
+                if(color[7-j][i] == 0){
+                    SetConsoleTextAttribute(h, 15);
+                    cout << blackboard[j][7-i] << " ";
+                }
+                else{
+                    SetConsoleTextAttribute(h, 8);
+                    cout << blackboard[j][7-i] << " ";
+                }
+
+            }
+            else{
+                SetConsoleTextAttribute(h, 6);
+                cout << "-" << " ";
+            }
         }
         cout << endl;
     }
 
     cout << "------------------------" << endl;
+
+    SetConsoleTextAttribute(h, 9);
+    cout << "0| ";
+    for(int i=0; i<8; i++){
+        char let = 'H';
+        cout << (char)(let - i) << " ";
+    }
+    SetConsoleTextAttribute(h, 7);
+
+    cout << endl;
+    // printcolor();
 }
 
 void board::printcolor(){

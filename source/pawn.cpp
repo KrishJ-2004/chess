@@ -8,8 +8,33 @@ vector< pair<int, int> > pawn::moveChoice(){
     vector< pair<int, int> > vec;
     pair<int, int> s = getpos();
 
-    if(validPos({s.first, s.second+1})){
-        vec.push_back({s.first, s.second + 1});
+    if(validPos(make_pair(s.first, s.second+1))){
+        vec.push_back(make_pair(s.first, s.second+1));
+    }
+    if(validPos(make_pair(s.first+1, s.second+1))){
+        vec.push_back(make_pair(s.first+1, s.second+1));
+    }
+
+    if(validPos(make_pair(s.first+1, s.second-1))){
+        vec.push_back(make_pair(s.first+1, s.second-1));
+    }
+
+    if(validPos(make_pair(s.first, s.second-1))){
+        vec.push_back(make_pair(s.first, s.second-1));
+    }
+    if(validPos(make_pair(s.first-1, s.second-1))){
+        vec.push_back(make_pair(s.first-1, s.second-1));
+    }
+
+    if(validPos(make_pair(s.first-1, s.second+1))){
+        vec.push_back(make_pair(s.first-1, s.second+1));
+    }
+
+    if(validPos(make_pair(s.first, s.second+2))){
+        vec.push_back(make_pair(s.first, s.second+2));
+    }
+    if(validPos(make_pair(s.first, s.second-2))){
+        vec.push_back(make_pair(s.first, s.second-2));
     }
 
     for(int i=0; i<vec.size(); i++){

@@ -37,6 +37,8 @@ vector< pair<int, int> > queen::moveChoice(){
     for(int i=0; i<vec.size(); i++){
         cout << "Pos: " << vec[i].first << "," << vec[i].second << endl;
     }
+
+    return vec;
 }
 
 void queen::printa(){

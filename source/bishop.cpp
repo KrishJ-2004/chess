@@ -25,6 +25,8 @@ vector< pair<int, int> > bishop::moveChoice(){
     for(int i=0; i<vec.size(); i++){
         cout << "Pos: " << vec[i].first << "," << vec[i].second << endl;
     }
+
+    return vec;
 }
 
 void bishop::printa(){

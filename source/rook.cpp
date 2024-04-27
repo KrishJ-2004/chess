@@ -23,6 +23,8 @@ vector< pair<int, int> > rook::moveChoice(){
     for(int i=0; i<vec.size(); i++){
         cout << "Pos: " << vec[i].first << "," << vec[i].second << endl;
     }
+
+    return vec;
 }
 
 void rook::printa(){

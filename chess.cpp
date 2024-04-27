@@ -8,101 +8,260 @@
 #include "./headers/board.h"
 #include <stdlib.h>
 
-void move(int start_row, int start_column, int end_row, int end_column, board& b){
+int move(int start_row, int start_column, int end_row, int end_column, board& b){
     int piece = b.getPos(start_row, start_column);
     int emp = 7;
 
     if(piece != emp){
 
         if(piece == 0){
+            cout << "Pawn" << endl;
             pawn p1({start_row, start_column});
             vector<pair<int, int>> choices = p1.moveChoice();
             cout << choices.size() << endl;
             for(int i=0; i<choices.size(); i++){
-                cout << choices[i].first << "," << choices[i].second << "::" << end_row << "," << end_column << endl;
+                // cout << choices[i].first << "," << choices[i].second << "::" << end_row << "," << end_column << endl;
                 if(choices[i].first == end_row && choices[i].second == end_column){
-                    b.setPos(end_row, end_column, 0);
-                    b.setCol(end_row, end_column, b.getCol(start_row, start_column));
-                    b.setPos(start_row, start_column, emp);
-                    b.setCol(start_row, start_column, emp);
-                    return;
+                    if(start_row == end_row || b.getPos(end_row, end_column) != 7){
+                        b.setPos(end_row, end_column, 0);
+                        b.setCol(end_row, end_column, b.getCol(start_row, start_column));
+                        b.setPos(start_row, start_column, emp);
+                        b.setCol(start_row, start_column, emp);
+                        cout << "Pawn moved" << endl;
+                        return 1;
+                    }
                 }
             }
             cout << "Invalid Pawn move" << endl;
+            return 0;
         }
         else if(piece == 1){
+            cout << "Knight" << endl;
             knight n1({start_row, start_column});
             vector<pair<int, int>> choices = n1.moveChoice();
+            cout << choices.size() << endl;
             for(int i=0; i<choices.size(); i++){
+                // cout << choices[i].first << "," << choices[i].second << "::" << end_row << "," << end_column << endl; 
                 if(choices[i].first == end_row && choices[i].second == end_column){
-                    b.setPos(end_row, end_column, 0);
+                    b.setPos(end_row, end_column, 1);
                     b.setCol(end_row, end_column, b.getCol(start_row, start_column));
                     b.setPos(start_row, start_column, emp);
                     b.setCol(start_row, start_column, emp);
-                    return;
+                    cout << "Knight moved" << endl;
+                    return 1;
                 }
             }
             cout << "Invalid Knight move" << endl;
+            return 0;
         }
+
         else if(piece == 2){
+            cout << "Bishop" << endl;
             bishop b1({start_row, start_column});
             vector<pair<int, int>> choices = b1.moveChoice();
             for(int i=0; i<choices.size(); i++){
                 if(choices[i].first == end_row && choices[i].second == end_column){
-                    b.setPos(end_row, end_column, 0);
+                    if(start_row + start_column == end_row + end_column){
+                        if(start_row < end_row){
+                            for(int i=1; i<end_row - start_row; i++){
+                                if(b.getPos(start_row + i, start_column - i) != emp){
+                                    return 0;
+                                }
+                            }
+                        }
+                        else{
+                            for(int i=1; i<start_row - end_column; i++){
+                                if(b.getPos(start_row - i, start_column + i) != emp){
+                                    return 0;
+                                }
+                            }
+                        }
+                    }   
+                    else{
+                        if(start_row < end_row){
+                            for(int i=1; i<end_row - start_row; i++){
+                                if(b.getPos(start_row + i, start_column + i) != emp){
+                                    return 0;
+                                }
+                            }
+                        }
+                        else{
+                            if(start_row < end_row){
+                                for(int i=1; i<start_row - end_row; i++){
+                                    if(b.getPos(start_row + i, start_column + i) != emp){
+                                        return 0;
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    b.setPos(end_row, end_column, 2);
                     b.setCol(end_row, end_column, b.getCol(start_row, start_column));
                     b.setPos(start_row, start_column, emp);
                     b.setCol(start_row, start_column, emp);
-                    return;
+                    cout << "Bishop moved" << endl;
+                    return 1;
                 }
             }
             cout << "Invalid Bishop move" << endl;
+            return 0;
         }
+
         else if(piece == 3){
+            cout << "Rook" << endl;
             rook r1({start_row, start_column});
             vector<pair<int, int>> choices = r1.moveChoice();
             for(int i=0; i<choices.size(); i++){
                 if(choices[i].first == end_row && choices[i].second == end_column){
-                    b.setPos(end_row, end_column, 0);
+                    if(start_row == end_row){
+                        if(start_column < end_column){
+                            for(int i=1; i< end_column - start_column; i++){
+                                if(b.getPos(start_row, start_column + i) != emp){
+                                    return 0;
+                                }
+                            }
+                        }
+                        else{
+                            for(int i=1; i< start_column - end_column; i++){
+                                if(b.getPos(start_row, start_column - i) != emp){
+                                    return 0;
+                                }
+                            }
+                        }
+                    }
+                    else{
+                        if(start_row < end_row){
+                            for(int i=1; i< end_row - start_row; i++){
+                                if(b.getPos(start_row + i, start_column) != emp){
+                                    return 0;
+                                }
+                            }
+                        }
+                        else{
+                            for(int i=1; i< start_row - end_row; i++){
+                                if(b.getPos(start_row, start_column + i) != emp){
+                                    return 0;
+                                }
+                            }
+                        }
+                    }
+
+                    b.setPos(end_row, end_column, 3);
                     b.setCol(end_row, end_column, b.getCol(start_row, start_column));
                     b.setPos(start_row, start_column, emp);
                     b.setCol(start_row, start_column, emp);
-                    return;
+                    cout << "Rook moved" << endl;
+                    return 1;
                 }
             }
             cout << "Invalid Rook move" << endl;
+            return 0;
         }
         else if(piece == 4){
+            cout << "Queen" << endl;
             queen q1({start_row, start_column});
             vector<pair<int, int>> choices = q1.moveChoice();
             for(int i=0; i<choices.size(); i++){
                 if(choices[i].first == end_row && choices[i].second == end_column){
-                    b.setPos(end_row, end_column, 0);
+                    if(start_row + start_column == end_row + end_column){
+                        if(start_row < end_row){
+                            for(int i=1; i<end_row - start_row; i++){
+                                if(b.getPos(start_row + i, start_column - i) != emp){
+                                    return 0;
+                                }
+                            }
+                        }
+                        else{
+                            for(int i=1; i<start_row - end_column; i++){
+                                if(b.getPos(start_row - i, start_column + i) != emp){
+                                    return 0;
+                                }
+                            }
+                        }
+                    }   
+                    else if(start_row - start_column == end_row - end_column){
+                        if(start_row < end_row){
+                            for(int i=1; i<end_row - start_row; i++){
+                                if(b.getPos(start_row + i, start_column + i) != emp){
+                                    return 0;
+                                }
+                            }
+                        }
+                        else{
+                            if(start_row < end_row){
+                                for(int i=1; i<start_row - end_row; i++){
+                                    if(b.getPos(start_row + i, start_column + i) != emp){
+                                        return 0;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    else if(start_row == end_row){
+                        if(start_column < end_column){
+                            for(int i=1; i< end_column - start_column; i++){
+                                if(b.getPos(start_row, start_column + i) != emp){
+                                    return 0;
+                                }
+                            }
+                        }
+                        else{
+                            for(int i=1; i< start_column - end_column; i++){
+                                if(b.getPos(start_row, start_column - i) != emp){
+                                    return 0;
+                                }
+                            }
+                        }
+                    }
+                    else if(start_column == end_column){
+                        if(start_row < end_row){
+                            for(int i=1; i< end_row - start_row; i++){
+                                if(b.getPos(start_row + i, start_column) != emp){
+                                    return 0;
+                                }
+                            }
+                        }
+                        else{
+                            for(int i=1; i< start_row - end_row; i++){
+                                if(b.getPos(start_row, start_column + i) != emp){
+                                    return 0;
+                                }
+                            }
+                        }
+                    }
+
+                    b.setPos(end_row, end_column, 4);
                     b.setCol(end_row, end_column, b.getCol(start_row, start_column));
                     b.setPos(start_row, start_column, emp);
                     b.setCol(start_row, start_column, emp);
-                    return;
+                    cout << "Queen moved" << endl;
+                    return 1;
                 }
             }
             cout << "Invalid Queen move" << endl;
+            return 0;
         }
         else if(piece == 5){
+            cout << "King" << endl;
             king k1({start_row, start_column});
             vector<pair<int, int>> choices = k1.moveChoice();
             for(int i=0; i<choices.size(); i++){
                 if(choices[i].first == end_row && choices[i].second == end_column){
-                    b.setPos(end_row, end_column, 0);
+                    b.setPos(end_row, end_column, 5);
                     b.setCol(end_row, end_column, b.getCol(start_row, start_column));
                     b.setPos(start_row, start_column, emp);
                     b.setCol(start_row, start_column, emp);
-                    return;
+                    cout << "King moved" << endl;
+                    return 1;
                 }
             }
             cout << "Invalid King move" << endl;
+            return 0;
         }
     }
 
-    return;
+    return 0;
 }
 
 int main(){
@@ -142,14 +301,85 @@ int main(){
     // k1.moveChoice();
 
     board b;
+    int turn = 0;
 
     b.initBoard();
     b.print();
 
-    cout << "Moving pawn " << endl;
-    move(0,1, 0,2, b);
-    cout << "-------------" << endl;
-    b.print();
+    char sclm, eclm;
+    int startr, startc, endr, endc;
 
+
+    for(int i=0; i<30; i++){
+        int vmove = 0;
+        system("CLS");
+        if(turn == 0){
+            cout << "Whites turn" << endl;
+            b.printwhite();
+            cin >> sclm >> startc >> eclm >> endc;
+            startr = sclm - 'A';
+            endr = eclm - 'A';
+            startc -= 1;
+            endc -= 1;
+            cout << startr << " " << startc << " || " << endr << " " << endc << endl;
+            if(b.getCol(startr, startc) == 0 && b.getCol(endr, endc) != 0){
+                if(b.getPos(startr, startc) != 0){
+                    cout << "A" << endl;
+                    vmove = move(startr, startc, endr, endc, b);
+                }
+                else if(startc < endc){
+                    if(startc == 1 && endc == 3){
+                        cout << "B" << endl;
+                        vmove = move(startr, startc, endr, endc, b);
+                    }
+                    else if(startc == endc - 1){
+                        cout << "C" << endl;
+                        vmove = move(startr, startc, endr, endc, b);
+                    }
+                }
+
+                if(vmove){
+                    turn = 1;
+                }
+                cout << "-------------" << endl;
+            }
+            else{
+                cout << "blud thought he could move other persons piece" << endl;
+            }
+            // b.printwhite();
+        }
+        else if(turn == 1){
+            cout << "Blacks turn" << endl;
+            b.printblack();
+            cin >> sclm >> startc >> eclm >> endc;
+            startr = sclm - 'A';
+            endr = eclm - 'A';
+            startc -= 1;
+            endc -= 1;
+            cout << startr << " " << startc << " || " << endr << " " << endc << endl;
+            if(b.getCol(startr, startc) == 1 && b.getCol(endr, endc) != 1){
+                if(b.getPos(startr, startc) != 0){
+                    vmove = move(startr, startc, endr, endc, b);
+                }
+                else if(startc > endc){
+                    if(startc == 6 && endc == 4){
+                        vmove = move(startr, startc, endr, endc, b);
+                    }
+                    else if(startc == endc + 1){
+                        vmove = move(startr, startc, endr, endc, b);
+                    }
+                }
+
+                if(vmove){
+                    turn = 0;
+                }
+                cout << "-------------" << endl;
+            }
+            else{
+                cout << "blud thought he could move other persons piece" << endl;
+            }
+            // b.printblack();
+        }
+    }
 }
 
