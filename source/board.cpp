@@ -20,7 +20,12 @@ board::board(){
 }
 
 int board::getPos(int a, int b){
-    return whiteboard[a][b];
+    if(a < 8 && a >= 0 && b < 8 && b >= 0){
+        return whiteboard[a][b];
+    }
+    else{
+        return 7;
+    }
 }
 
 void board::setPos(int a, int b, int piece){
@@ -29,7 +34,12 @@ void board::setPos(int a, int b, int piece){
 }
 
 int board::getCol(int a, int b){
-    return color[a][b];
+    if(a < 8 && a >= 0 && b < 8 && b >= 0){
+        return color[a][b];
+    }
+    else{
+        return 7;
+    };
 }
 
 void board::setCol(int a, int b, int Col){

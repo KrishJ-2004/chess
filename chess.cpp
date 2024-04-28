@@ -8,6 +8,312 @@
 #include "./headers/board.h"
 #include <stdlib.h>
 
+int whiteCheck(board& b){
+    int kingi, kingj;
+    for(int i=0; i<8; i++){
+        for(int j=0; j<8; j++){
+            if(b.getPos(i, j) == 5 && b.getCol(i, j) == 0){
+                kingi = i;
+                kingj = j;
+                break;
+            }
+        }
+    }
+
+    //diagonals
+    for(int i=1; i<8; i++){
+        if(b.getCol(kingi + i, kingj + i) == 0){
+            break;
+        }
+        if(b.getCol(kingi + i, kingj + i) == 1 && (b.getPos(kingi + i, kingj + i) == 2 || b.getPos(kingi + i, kingj + i) == 4)){
+            return 1;
+        }
+    }
+    for(int i=1; i<8; i++){
+        if(b.getCol(kingi - i, kingj - i) == 0){
+            break;
+        }
+        if(b.getCol(kingi - i, kingj - i) == 1 && (b.getPos(kingi - i, kingj - i) == 2 || b.getPos(kingi - i, kingj - i) == 4)){
+            return 1;
+        }
+    }
+
+    for(int i=1; i<8; i++){
+        if(b.getCol(kingi + i, kingj - i) == 0){
+            break;
+        }
+        if(b.getCol(kingi + i, kingj - i) == 1 && (b.getPos(kingi + i, kingj - i) == 2 || b.getPos(kingi + i, kingj - i) == 4)){
+            return 1;
+        }
+    }
+    for(int i=1; i<8; i++){
+        if(b.getCol(kingi - i, kingj + i) == 0){
+            break;
+        }
+        if(b.getCol(kingi - i, kingj + i) == 1 && (b.getPos(kingi - i, kingj + i) == 2 || b.getPos(kingi - i, kingj + i) == 4)){
+            return 1;
+        }
+    }
+
+    //straights
+    for(int i=1; i<8; i++){
+        if(b.getCol(kingi, kingj + i) == 0){
+            break;
+        }
+        if(b.getCol(kingi, kingj + i) == 1 && (b.getPos(kingi, kingj + i) == 3 || b.getPos(kingi, kingj + i) == 4)){
+            return 1;
+        }
+    }
+    for(int i=1; i<8; i++){
+        if(b.getCol(kingi, kingj - i) == 0){
+            break;
+        }
+        if(b.getCol(kingi, kingj - i) == 1 && (b.getPos(kingi, kingj - i) == 3 || b.getPos(kingi, kingj - i) == 4)){
+            return 1;
+        }
+    }
+
+    for(int i=1; i<8; i++){
+        if(b.getCol(kingi + i, kingj) == 0){
+            break;
+        }
+        if(b.getCol(kingi + i, kingj) == 1 && (b.getPos(kingi + i, kingj) == 3 || b.getPos(kingi + i, kingj) == 4)){
+            return 1;
+        }
+    }
+    for(int i=1; i<8; i++){
+        if(b.getCol(kingi - i, kingj) == 0){
+            break;
+        }
+        if(b.getCol(kingi - i, kingj) == 1 && (b.getPos(kingi - i, kingj) == 3 || b.getPos(kingi - i, kingj) == 4)){
+            return 1;
+        }
+    }
+
+    //horse
+    if(b.getCol(kingi + 1, kingj + 2) == 1 && b.getPos(kingi + 1, kingj + 2) == 1){
+        return 1;
+    }
+    if(b.getCol(kingi + 2, kingj + 1) == 1 && b.getPos(kingi + 2, kingj + 1) == 1){
+        return 1;
+    }
+
+    if(b.getCol(kingi - 1, kingj + 2) == 1 && b.getPos(kingi - 1, kingj + 2) == 1){
+        return 1;
+    }
+    if(b.getCol(kingi - 2, kingj + 1) == 1 && b.getPos(kingi - 2, kingj + 1) == 1){
+        return 1;
+    }
+
+    if(b.getCol(kingi - 1, kingj - 2) == 1 && b.getPos(kingi - 1, kingj - 2) == 1){
+        return 1;
+    }
+    if(b.getCol(kingi - 2, kingj - 1) == 1 && b.getPos(kingi - 2, kingj - 1) == 1){
+        return 1;
+    }
+
+    if(b.getCol(kingi + 1, kingj - 2) == 1 && b.getPos(kingi + 1, kingj - 2) == 1){
+        return 1;
+    }
+    if(b.getCol(kingi + 2, kingj - 1) == 1 && b.getPos(kingi + 2, kingj - 1) == 1){
+        return 1;
+    }
+
+    //king
+    if(b.getCol(kingi + 1, kingj + 1) == 1 && b.getPos(kingi + 1, kingj + 1) == 5){
+        return 1;
+    }
+    if(b.getCol(kingi + 1, kingj + 1) == 1 && b.getPos(kingi + 1, kingj + 1) == 5){
+        return 1;
+    }
+
+    if(b.getCol(kingi - 1, kingj + 1) == 1 && b.getPos(kingi - 1, kingj + 1) == 5){
+        return 1;
+    }
+    if(b.getCol(kingi - 1, kingj + 1) == 1 && b.getPos(kingi - 1, kingj + 1) == 5){
+        return 1;
+    }
+
+    if(b.getCol(kingi - 1, kingj - 1) == 1 && b.getPos(kingi - 1, kingj - 1) == 5){
+        return 1;
+    }
+    if(b.getCol(kingi - 1, kingj - 1) == 1 && b.getPos(kingi - 1, kingj - 1) == 5){
+        return 1;
+    }
+
+    if(b.getCol(kingi + 1, kingj - 1) == 1 && b.getPos(kingi + 1, kingj - 1) == 5){
+        return 1;
+    }
+    if(b.getCol(kingi + 1, kingj - 1) == 1 && b.getPos(kingi + 1, kingj - 1) == 5){
+        return 1;
+    }
+
+    //pawn
+    if(b.getCol(kingi + 1, kingj + 1) == 1 && b.getPos(kingi + 1, kingj + 1) == 0){
+        return 1;
+    }
+    if(b.getCol(kingi - 1, kingj + 1) == 1 && b.getPos(kingi - 1, kingj + 1) == 0){
+        return 1;
+    }
+
+    return 0;
+}
+
+int blackCheck(board& b){
+    int kingi, kingj;
+    for(int i=0; i<8; i++){
+        for(int j=0; j<8; j++){
+            if(b.getPos(i, j) == 5 && b.getCol(i, j) == 1){
+                kingi = i;
+                kingj = j;
+                break;
+            }
+        }
+    }
+
+
+    //diagonals
+    for(int i=1; i<8; i++){
+        if(b.getCol(kingi + i, kingj + i) == 1){
+            break;
+        }
+        if(b.getCol(kingi + i, kingj + i) == 0 && (b.getPos(kingi + i, kingj + i) == 2 || b.getPos(kingi + i, kingj + i) == 4)){
+            return 1;
+        }
+    }
+    for(int i=1; i<8; i++){
+        if(b.getCol(kingi - i, kingj - i) == 1){
+            break;
+        }
+        if(b.getCol(kingi - i, kingj - i) == 0 && (b.getPos(kingi - i, kingj - i) == 2 || b.getPos(kingi - i, kingj - i) == 4)){
+            return 1;
+        }
+    }
+
+    for(int i=1; i<8; i++){
+        if(b.getCol(kingi + i, kingj - i) == 1){
+            break;
+        }
+        if(b.getCol(kingi + i, kingj - i) == 0 && (b.getPos(kingi + i, kingj - i) == 2 || b.getPos(kingi + i, kingj - i) == 4)){
+            return 1;
+        }
+    }
+    for(int i=1; i<8; i++){
+        if(b.getCol(kingi - i, kingj + i) == 1){
+            break;
+        }
+        if(b.getCol(kingi - i, kingj + i) == 0 && (b.getPos(kingi - i, kingj + i) == 2 || b.getPos(kingi - i, kingj + i) == 4)){
+            return 1;
+        }
+    }
+
+
+    //straights
+    for(int i=1; i<8; i++){
+        if(b.getCol(kingi, kingj + i) == 1){
+            break;
+        }
+        if(b.getCol(kingi, kingj + i) == 0 && (b.getPos(kingi, kingj + i) == 3 || b.getPos(kingi, kingj + i) == 4)){
+            return 1;
+        }
+    }
+    for(int i=1; i<8; i++){
+        if(b.getCol(kingi, kingj - i) == 1){
+            break;
+        }
+        if(b.getCol(kingi, kingj - i) == 0 && (b.getPos(kingi, kingj - i) == 3 || b.getPos(kingi, kingj - i) == 4)){
+            return 1;
+        }
+    }
+
+    for(int i=1; i<8; i++){
+        if(b.getCol(kingi + i, kingj) == 1){
+            break;
+        }
+        if(b.getCol(kingi + i, kingj) == 0 && (b.getPos(kingi + i, kingj) == 3 || b.getPos(kingi + i, kingj) == 4)){
+            return 1;
+        }
+    }
+    for(int i=1; i<8; i++){
+        if(b.getCol(kingi - i, kingj) == 1){
+            break;
+        }
+        if(b.getCol(kingi - i, kingj) == 0 && (b.getPos(kingi - i, kingj) == 3 || b.getPos(kingi - i, kingj) == 4)){
+            return 1;
+        }
+    }
+
+    //horse
+    if(b.getCol(kingi + 1, kingj + 2) == 0 && b.getPos(kingi + 1, kingj + 2) == 1){
+        return 1;
+    }
+    if(b.getCol(kingi + 2, kingj + 1) == 0 && b.getPos(kingi + 2, kingj + 1) == 1){
+        return 1;
+    }
+
+    if(b.getCol(kingi - 1, kingj + 2) == 0 && b.getPos(kingi - 1, kingj + 2) == 1){
+        return 1;
+    }
+    if(b.getCol(kingi - 2, kingj + 1) == 0 && b.getPos(kingi - 2, kingj + 1) == 1){
+        return 1;
+    }
+
+    if(b.getCol(kingi - 1, kingj - 2) == 0 && b.getPos(kingi - 1, kingj - 2) == 1){
+        return 1;
+    }
+    if(b.getCol(kingi - 2, kingj - 1) == 0 && b.getPos(kingi - 2, kingj - 1) == 1){
+        return 1;
+    }
+
+    if(b.getCol(kingi + 1, kingj - 2) == 0 && b.getPos(kingi + 1, kingj - 2) == 1){
+        return 1;
+    }
+    if(b.getCol(kingi + 2, kingj - 1) == 0 && b.getPos(kingi + 2, kingj - 1) == 1){
+        return 1;
+    }
+
+    //king
+    if(b.getCol(kingi + 1, kingj + 1) == 0 && b.getPos(kingi + 1, kingj + 1) == 5){
+        return 1;
+    }
+    if(b.getCol(kingi + 1, kingj + 1) == 0 && b.getPos(kingi + 1, kingj + 1) == 5){
+        return 1;
+    }
+
+    if(b.getCol(kingi - 1, kingj + 1) == 0 && b.getPos(kingi - 1, kingj + 1) == 5){
+        return 1;
+    }
+    if(b.getCol(kingi - 1, kingj + 1) == 0 && b.getPos(kingi - 1, kingj + 1) == 5){
+        return 1;
+    }
+
+    if(b.getCol(kingi - 1, kingj - 1) == 0 && b.getPos(kingi - 1, kingj - 1) == 5){
+        return 1;
+    }
+    if(b.getCol(kingi - 1, kingj - 1) == 0 && b.getPos(kingi - 1, kingj - 1) == 5){
+        return 1;
+    }
+
+    if(b.getCol(kingi + 1, kingj - 1) == 0 && b.getPos(kingi + 1, kingj - 1) == 5){
+        return 1;
+    }
+    if(b.getCol(kingi + 1, kingj - 1) == 0 && b.getPos(kingi + 1, kingj - 1) == 5){
+        return 1;
+    }
+
+
+    //pawn
+    if(b.getCol(kingi + 1, kingj - 1) == 0 && b.getPos(kingi + 1, kingj - 1) == 0){
+        return 1;
+    }
+    if(b.getCol(kingi - 1, kingj - 1) == 0 && b.getPos(kingi - 1, kingj - 1) == 0){
+        return 1;
+    }
+
+    return 0;
+}
+
+
 int move(int start_row, int start_column, int end_row, int end_column, board& b){
     int piece = b.getPos(start_row, start_column);
     int emp = 7;
@@ -338,6 +644,11 @@ int main(){
                     }
                 }
 
+                if(whiteCheck(b)){
+                    move(endr, endc, startr, startc, b);
+                    vmove = 0;
+                }
+
                 if(vmove){
                     turn = 1;
                 }
@@ -350,6 +661,7 @@ int main(){
         }
         else if(turn == 1){
             cout << "Blacks turn" << endl;
+            b.printcolor();
             b.printblack();
             cin >> sclm >> startc >> eclm >> endc;
             startr = sclm - 'A';
@@ -368,6 +680,11 @@ int main(){
                     else if(startc == endc + 1){
                         vmove = move(startr, startc, endr, endc, b);
                     }
+                }
+
+                if(blackCheck(b)){
+                    move(endr, endc, startr, startc, b);
+                    vmove = 0;
                 }
 
                 if(vmove){
