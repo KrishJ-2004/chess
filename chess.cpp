@@ -376,7 +376,7 @@ int move(int start_row, int start_column, int end_row, int end_column, board& b)
                             }
                         }
                         else{
-                            for(int i=1; i<start_row - end_column; i++){
+                            for(int i=1; i<start_row - end_row; i++){
                                 if(b.getPos(start_row - i, start_column + i) != emp){
                                     return 0;
                                 }
@@ -392,11 +392,9 @@ int move(int start_row, int start_column, int end_row, int end_column, board& b)
                             }
                         }
                         else{
-                            if(start_row < end_row){
-                                for(int i=1; i<start_row - end_row; i++){
-                                    if(b.getPos(start_row + i, start_column + i) != emp){
-                                        return 0;
-                                    }
+                            for(int i=1; i<start_row - end_row; i++){
+                                if(b.getPos(start_row - i, start_column - i) != emp){
+                                    return 0;
                                 }
                             }
                         }
@@ -479,7 +477,7 @@ int move(int start_row, int start_column, int end_row, int end_column, board& b)
                             }
                         }
                         else{
-                            for(int i=1; i<start_row - end_column; i++){
+                            for(int i=1; i<start_row - end_row; i++){
                                 if(b.getPos(start_row - i, start_column + i) != emp){
                                     return 0;
                                 }
@@ -495,11 +493,9 @@ int move(int start_row, int start_column, int end_row, int end_column, board& b)
                             }
                         }
                         else{
-                            if(start_row < end_row){
-                                for(int i=1; i<start_row - end_row; i++){
-                                    if(b.getPos(start_row + i, start_column + i) != emp){
-                                        return 0;
-                                    }
+                            for(int i=1; i<start_row - end_row; i++){
+                                if(b.getPos(start_row - i, start_column - i) != emp){
+                                    return 0;
                                 }
                             }
                         }
@@ -616,7 +612,7 @@ int main(){
     int startr, startc, endr, endc;
 
 
-    for(int i=0; i<30; i++){
+    for(int i=0; i<100; i++){
         int vmove = 0;
         system("CLS");
         if(turn == 0){
@@ -630,17 +626,19 @@ int main(){
             cout << startr << " " << startc << " || " << endr << " " << endc << endl;
             if(b.getCol(startr, startc) == 0 && b.getCol(endr, endc) != 0){
                 if(b.getPos(startr, startc) != 0){
-                    cout << "A" << endl;
                     vmove = move(startr, startc, endr, endc, b);
                 }
                 else if(startc < endc){
-                    if(startc == 1 && endc == 3){
-                        cout << "B" << endl;
+                    if(startc == 1 && endc == 3 && b.getCol(endr, endc) == 7){
                         vmove = move(startr, startc, endr, endc, b);
                     }
                     else if(startc == endc - 1){
-                        cout << "C" << endl;
-                        vmove = move(startr, startc, endr, endc, b);
+                        if(startr == endr && b.getCol(endr, endc) == 7){
+                            vmove = move(startr, startc, endr, endc, b);
+                        }
+                        else if(startr != endr){
+                            vmove = move(startr, startc, endr, endc, b);
+                        }
                     }
                 }
 
@@ -661,7 +659,6 @@ int main(){
         }
         else if(turn == 1){
             cout << "Blacks turn" << endl;
-            b.printcolor();
             b.printblack();
             cin >> sclm >> startc >> eclm >> endc;
             startr = sclm - 'A';
@@ -673,12 +670,17 @@ int main(){
                 if(b.getPos(startr, startc) != 0){
                     vmove = move(startr, startc, endr, endc, b);
                 }
-                else if(startc > endc){
-                    if(startc == 6 && endc == 4){
+                else if(startc > endc ){
+                    if(startc == 6 && endc == 4 && b.getCol(endr, endc) == 7){
                         vmove = move(startr, startc, endr, endc, b);
                     }
                     else if(startc == endc + 1){
-                        vmove = move(startr, startc, endr, endc, b);
+                        if(startr == endr && b.getCol(endr, endc) == 7){
+                            vmove = move(startr, startc, endr, endc, b);
+                        }
+                        else if(startr != endr){
+                            vmove = move(startr, startc, endr, endc, b);
+                        }
                     }
                 }
 
@@ -699,4 +701,3 @@ int main(){
         }
     }
 }
-
